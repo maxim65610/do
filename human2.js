@@ -33,8 +33,8 @@ let a = new pair(str.length + 1, -1)
 let b = new pair(str.length + 1, -1)
 let size = tree.length;
 
-for (let i = 0; i < tree.length; i++) {    //создаем 1го отца
-    if (tree[i].freq <= a.freq){             //ищем 2 минимальных по частоте элемента 
+for (let i = 0; i < tree.length; i++) {   
+    if (tree[i].freq <= a.freq){            
        b.freq = a.freq;
        b.iter = a.iter;
        a.freq = tree[i].freq;
@@ -51,11 +51,11 @@ tree[a.iter].used = 1;
 tree[b.iter].used = 1;
 tree[a.iter].code = "0";
 tree[b.iter].code = "1";
-a.freq = str.length + 1;                       //создали 1го отца
+a.freq = str.length + 1;                     
 
 let count = 2;
 const size2 = tree.length - 1;
-while(count < size2){                          //создает отцов для всех точек
+while(count < size2){                         
   for (let i = 0; i < size; i++){                        
     if (tree[i].used == 0 && a.freq >= tree[i].freq){
       a.freq = tree[i].freq;
@@ -69,16 +69,16 @@ while(count < size2){                          //создает отцов дл�
   count += 1;
 }
 
-tree[tree.length - 1].code = "";              //корень имеет код 0
+tree[tree.length - 1].code = "";            
 
-for (let i = tree.length - 1; i >= size; i--){                 //трясем дерево хехехе
+for (let i = tree.length - 1; i >= size; i--){               
   if (tree[i].lson !=-1)
     tree[tree[i].leftson].code = tree[i].code + tree[tree[i].leftson].code;
   if (tree[i].rson !=-1)
     tree[tree[i].rightson].code = tree[i].code + tree[tree[i].rightson].code;
 }
 let res="";
-for (let i=0; i<str.length; i++){                           //вывод закодированного сообщения
+for (let i=0; i<str.length; i++){                           
   for (let j=0;j<size;j++){
     if (tree[j].letter==str[i]){
       res+=tree[j].code;
